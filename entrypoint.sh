@@ -24,7 +24,8 @@ POLL_TIMEOUT=${POLL_TIMEOUT:-$DEFAULT_POLL_TIMEOUT}
 #git checkout "${GITHUB_REF}"
 #git checkout "${GITHUB_REF:11}" --
 
-branch="$(git symbolic-ref --short HEAD)"
+#branch="$(git symbolic-ref --short HEAD)"
+branch="main"
 branch_uri="$(urlencode ${branch})"
 
 sh -c "git checkout ${LOCAL_GITHUB_REF}"
