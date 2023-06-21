@@ -34,15 +34,15 @@ sh -c "git remote add mirror $*"
 sh -c "echo pushing to $branch branch at $(git remote get-url --push mirror)"
 if [ "${FORCE_PUSH:-}" = "true" ]
 then
-  sh -c "git push --force mirror ${GITHUB_REF}"
+  sh -c "git push --force mirror ${GITHUB_REF}:$branch"
 else
-  sh -c "git push mirror ${GITHUB_REF}"
+  sh -c "git push mirror ${GITHUB_REF}:$branch"
 fi
 
 if [ "${FOLLOW_TAGS:-}" = "true" ]
 then
   sh -c "echo pushing with --tags"
-  sh -c "git push --tags mirror ${GITHUB_REF}"
+  sh -c "git push --tags mirror ${GITHUB_REF}:$branch"
 fi
 
 #sleep $POLL_TIMEOUT
