@@ -21,8 +21,8 @@ urlencode() (
 DEFAULT_POLL_TIMEOUT=10
 POLL_TIMEOUT=${POLL_TIMEOUT:-$DEFAULT_POLL_TIMEOUT}
 
-git checkout "${GITHUB_REF}"
-#git checkout "${GITHUB_SHA:11}" --
+#git checkout "${GITHUB_REF}"
+#git checkout "${GITHUB_REF:11}" --
 
 branch="$(git symbolic-ref --short HEAD)"
 branch_uri="$(urlencode ${branch})"
@@ -34,15 +34,15 @@ sh -c "git remote add mirror $*"
 sh -c "echo pushing to $branch branch at $(git remote get-url --push mirror)"
 if [ "${FORCE_PUSH:-}" = "true" ]
 then
-  sh -c "git push --force mirror $branch"
+  sh -c "git push --force mirror ${GITHUB_REF}"
 else
-  sh -c "git push mirror $branch"
+  sh -c "git push mirror ${GITHUB_REF}"
 fi
 
 if [ "${FOLLOW_TAGS:-}" = "true" ]
 then
   sh -c "echo pushing with --tags"
-  sh -c "git push --tags mirror $branch"
+  sh -c "git push --tags mirror ${GITHUB_REF}"
 fi
 
 #sleep $POLL_TIMEOUT
