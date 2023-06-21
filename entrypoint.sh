@@ -27,6 +27,7 @@ POLL_TIMEOUT=${POLL_TIMEOUT:-$DEFAULT_POLL_TIMEOUT}
 branch="$(git symbolic-ref --short HEAD)"
 branch_uri="$(urlencode ${branch})"
 
+sh -c "git checkout ${LOCAL_GITHUB_REF}"
 sh -c "git config --global credential.username $GITLAB_USERNAME"
 sh -c "git config --global core.askPass /cred-helper.sh"
 sh -c "git config --global credential.helper cache"
