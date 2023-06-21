@@ -31,7 +31,7 @@ sh -c "git config --global credential.username $GITLAB_USERNAME"
 sh -c "git config --global core.askPass /cred-helper.sh"
 sh -c "git config --global credential.helper cache"
 sh -c "git remote add mirror $*"
-sh -c "echo pushing to $branch branch at $(git remote get-url --push mirror)"
+sh -c "echo pushing local branch ${GITHUB_REF} to $branch branch at $(git remote get-url --push mirror)"
 if [ "${FORCE_PUSH:-}" = "true" ]
 then
   sh -c "git push --force mirror ${GITHUB_REF}:$branch"
