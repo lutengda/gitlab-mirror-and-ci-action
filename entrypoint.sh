@@ -34,6 +34,7 @@ sh -c "git config --global core.askPass /cred-helper.sh"
 sh -c "git config --global credential.helper cache"
 sh -c "git remote add mirror $*"
 sh -c "echo pushing local branch ${LOCAL_GITHUB_REF} to $branch branch at $(git remote get-url --push mirror)"
+sh -c "git config --global --add safe.directory /github/workspace"
 if [ "${FORCE_PUSH:-}" = "true" ]
 then
   sh -c "git push --force mirror ${LOCAL_GITHUB_REF}:$branch"
